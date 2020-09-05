@@ -4,6 +4,7 @@
 """
 import os
 import re
+import platform
 import subprocess as sp
 import logging
 
@@ -78,7 +79,8 @@ class Wrapper(object):
         :return: Path to the bundled executable
         :rtype: str
         """
-        arch = "win64" if os.environ['PROCESSOR_ARCHITECTURE'] else "win32"
+        python_arch, win = platform.architecture()
+        arch = "win64" if python_arch == "64bit" else "win32"
         return os.path.join(os.path.dirname(__file__), "bin", arch, "nssm.exe")
 
 
