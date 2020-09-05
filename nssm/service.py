@@ -102,7 +102,9 @@ class Service(object):
         :rtype: :class:`.ServiceStatus`
         """
         rc, out = Wrapper.command("status", self.SERVICE_NAME)
-        return ServiceStatus(out.strip())
+        formatted_out = out.replace("\x00", "")
+        stripped_out = formatted_out.strip()
+        return ServiceStatus(stripped_out)
 
     def configure(self, config):
         """

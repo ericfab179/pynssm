@@ -44,11 +44,11 @@ class Wrapper(object):
             out = sp.check_output(cmd,
                                   stderr=sp.STDOUT,
                                   universal_newlines=True)
-            return 0, out.decode("utf-16")
+            return 0, out
 
         except sp.CalledProcessError as err:
             # Tidy up the command error output
-            err.output = err.output.decode("utf-16")
+            err.output = err.output
             err.output = re.sub(r"\n+", " ", err.output)
 
             # Map the error output code to an exception
